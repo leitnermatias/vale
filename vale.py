@@ -1,6 +1,7 @@
 import datetime
 import requests
 import urllib3
+import sys
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
@@ -27,6 +28,10 @@ def create_payload(
     }
 
 today = datetime.datetime.now()
+if len(sys.argv) > 1:
+    today = datetime.datetime(2023, int(sys.argv[1]), 1)
+
+print("Looking starting from: ", today)
 dates = [today + datetime.timedelta(days=i) for i in range(38)]
 
 found_going = []
